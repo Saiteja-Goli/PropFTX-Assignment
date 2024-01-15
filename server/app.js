@@ -1,9 +1,12 @@
 const express = require("express");
+const cors = require("cors");
 
 const connection = require("./Configs/db");
 const movie_router = require("./Router/movieRouter");
+
 const app = express();
 app.use(express.json());
+app.use(cors());
 
 app.get("/", (req, res) => {
   res.status(200).json({ msg: "This is Backend" });
