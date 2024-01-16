@@ -30,7 +30,6 @@ const MovieList = () => {
     const toast = useToast()
 
 
-
     //Fetching Movies
     useEffect(() => {
         const fetchMovies = async () => {
@@ -52,35 +51,40 @@ const MovieList = () => {
             setMovies([...movies, response.data.movie]);
             toast({
                 title: 'Movie Added.',
-                description: "Movie Added Successfuly.",
+                description: "Movie Added Successfully.",
                 status: 'success',
                 duration: 5000,
                 isClosable: true,
-            })
-
+            });
         } catch (error) {
             console.error("Error adding movie:", error);
         }
     };
     //Editing Movie
     const handleEditMovie = async (editedMovie) => {
+        console.log('Edited Movie:', editedMovie);
+
         try {
             const response = await axios.put(`https://violet-monkey-coat.cyclic.app/movies/edit/${editedMovie._id}`, editedMovie);
+            console.log('Edit Movie Response:', response.data);
+
             const updatedMovies = movies.map(movie =>
                 movie._id === response.data.movie._id ? response.data.movie : movie
             );
             setMovies(updatedMovies);
+
             toast({
                 title: 'Movie Edited.',
-                description: "Movie Edited Successfuly.",
+                description: "Movie Edited Successfully.",
                 status: 'info',
                 duration: 5000,
                 isClosable: true,
-            })
+            });
         } catch (error) {
             console.error("Error editing movie:", error);
         }
     };
+
     //Deleting Movie
     const handleDeleteMovie = async (movieId) => {
         try {
@@ -164,7 +168,7 @@ const MovieList = () => {
             <MovieForm
                 isOpen={isAddFormOpen}
                 onClose={() => setIsAddFormOpen(false)}
-                onSubmit={handleAddMovie}
+                onSubmit={handleAddMovie}  // Make sure you pass the correct onSubmit function here
                 formData={null}
                 setFormData={() => { }}
             />

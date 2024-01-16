@@ -56,14 +56,18 @@ const MovieForm = ({ isOpen, onClose, onSubmit, formData, setFormData }) => {
         // Check for empty fields
         const errors = {};
         Object.keys(localFormData).forEach((key) => {
-            if (!localFormData[key]) {
+            // Exclude properties like __v from validation
+            if (!localFormData[key] && key !== "__v") {
                 errors[key] = true;
             }
         });
 
         if (Object.keys(errors).length > 0) {
             setFormErrors(errors);
+            console.log('Form has errors:', errors);
         } else {
+            console.log('Form Data:', localFormData);
+
             // Submit the form and reset localFormData
             onSubmit(localFormData);
             onClose();
@@ -72,6 +76,7 @@ const MovieForm = ({ isOpen, onClose, onSubmit, formData, setFormData }) => {
                 year: "",
                 image: "",
             });
+
             // Clear any previous errors
             setFormErrors({
                 title: false,
@@ -80,6 +85,8 @@ const MovieForm = ({ isOpen, onClose, onSubmit, formData, setFormData }) => {
             });
         }
     };
+
+
 
     return (
         <Modal isOpen={isOpen} onClose={onClose}>
