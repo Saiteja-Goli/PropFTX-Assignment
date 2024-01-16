@@ -42,13 +42,13 @@ Make sure you have the following installed:
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/your-username/movie-app.git
+   git clone https://github.com/Saiteja-Goli/PropFTX-Assignment.git
    ```
 
 2. Navigate to the project folder:
 
    ```bash
-   cd movie-app
+   cd client
    ```
 
 3. Install dependencies:
@@ -81,4 +81,4 @@ These technologies, collectively known as the MERN stack, enable a full-stack Ja
 
 ## License
 
-This project is licensed under the [MIT License](LICENSE).
+This project is licensed under the MIT License.
