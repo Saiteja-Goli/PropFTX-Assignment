@@ -63,6 +63,7 @@ To start the development server:
 
 ```bash
 npm start
+```
 
 ## Technologies Used
 
@@ -78,8 +79,6 @@ This project leverages the following technologies:
 
 These technologies, collectively known as the MERN stack, enable a full-stack JavaScript development environment, providing flexibility, scalability, and efficiency in building modern web applications.
 
-
 ## License
 
 This project is licensed under the [MIT License](LICENSE).
-```
