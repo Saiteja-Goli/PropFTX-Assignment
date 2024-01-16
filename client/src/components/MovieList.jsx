@@ -8,6 +8,7 @@ import {
     CardBody,
     Center,
     Heading,
+    HStack,
     Image,
     Stack,
     Text,
@@ -15,12 +16,20 @@ import {
 } from "@chakra-ui/react";
 
 import MovieForm from "./MovieForm";
+import Navbar from "./Navbar";
+import { auth, provider } from "./firebase"
+import { onAuthStateChanged, signInWithPopup, signOut } from "firebase/auth";
+
 const MovieList = () => {
     const [movies, setMovies] = useState([]);
     const [isAddFormOpen, setIsAddFormOpen] = useState(false);
     const [isEditFormOpen, setIsEditFormOpen] = useState(false);
     const [editFormData, setEditFormData] = useState(null);
+    const [gData, setgData] = useState("")
+    const [data, setData] = useState(true)
     const toast = useToast()
+
+
 
     //Fetching Movies
     useEffect(() => {
@@ -89,20 +98,68 @@ const MovieList = () => {
             console.error("Error deleting movie:", error);
         }
     };
+    //Login
+    const handleGoogleLogin = async () => {
+        if (auth.currentUser) {
+            // If user is already logged in, log them out
+            await signOut(auth);
+            toast({
+                title: 'SignOut',
+                description: "SignOut Successfull.",
+                status: "warning",
+                duration: 5000,
+                isClosable: true,
+            })
+        } else {
+            // If user is not logged in, show Google login popup
+            signInWithPopup(auth, provider).then((data) => {
+                console.log(data);
+                setgData(data.user.displayName);
+                toast({
+                    title: 'SignIn',
+                    description: "SignIn Successfull.",
+                    status: "success",
+                    duration: 5000,
+                    isClosable: true,
+                })
+            });
+        }
+        setData(false);
+
+    }
+    //Check user is already authenticated
+    useEffect(() => {
+        const unsubscribe = onAuthStateChanged(auth, (user) => {
+            if (user) {
+                setgData(user.displayName);
+                setData(false);
+            } else {
+                setgData("");
+                setData(true);
+            }
+        });
+        return () => unsubscribe();
+    }, []);
 
     return (
         <div>
-            <Box backgroundColor="purple.200"
-                mb={5}
-                p={5}
-                position="fixed"
-                width="100%"
-                top="0"
-                zIndex="1000"
-            ><Heading>Movies</Heading></Box>
-            <Button variant="solid" colorScheme="green" mt={100} ml={960} onClick={() => setIsAddFormOpen(true)}>
-                Add Movie
-            </Button>
+            <Navbar />
+            <HStack mt={100} ml={900}>
+                <Button variant="solid" colorScheme="green" onClick={() => setIsAddFormOpen(true)}>
+                    Add Movie
+                </Button>
+
+                <Button variant="solid" colorScheme="green" onClick={handleGoogleLogin}>
+                    {auth.currentUser ? "Logout" : "Login"}
+                </Button>
+
+                {auth.currentUser && (
+                    <Text fontSize="xl" fontWeight="bold" color="blue.500" ml={4}>
+                        {gData}
+                    </Text>
+                )}
+            </HStack>
+
 
             <MovieForm
                 isOpen={isAddFormOpen}
@@ -142,7 +199,7 @@ const MovieList = () => {
                                     <ButtonGroup mb={10} spacing="2">
                                         <Button
                                             variant="solid"
-                                            colorScheme="blue"
+                                            colorScheme="orange"
                                             onClick={() => {
                                                 setIsEditFormOpen(true);
                                                 setEditFormData(movie);
