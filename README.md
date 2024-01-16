@@ -1,5 +1,7 @@
 # PropFTX-Assignment
 
+# DeployedLink :
+-[Link](#https://client-i3a44j2j3-saiteja-goli.vercel.app/)
 # Movie App
 
 A React application for managing a collection of movies with CRUD operations.

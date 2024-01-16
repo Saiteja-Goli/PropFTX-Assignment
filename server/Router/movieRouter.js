@@ -4,7 +4,7 @@ require("dotenv").config();
 const movie_router = express.Router();
 
 // Get All Movies from Database
-movie_router.get("/", async (req, res) => {
+movie_router.get("/allmovies", async (req, res) => {
   try {
     const movies = await movieModel.find();
     res.status(200).json({ message: "All Movies Fetched Successfully", movies: movies });

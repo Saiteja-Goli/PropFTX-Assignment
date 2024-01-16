@@ -26,7 +26,7 @@ const MovieList = () => {
     useEffect(() => {
         const fetchMovies = async () => {
             try {
-                const response = await axios.get("https://propftxmovies-7d1253gor-saiteja-goli.vercel.app/movies/");
+                const response = await axios.get("https://violet-monkey-coat.cyclic.app/movies");
                 console.log(response.data.movies);
                 setMovies(response.data.movies);
             } catch (error) {
@@ -39,7 +39,7 @@ const MovieList = () => {
     //Adding New Movie
     const handleAddMovie = async (newMovie) => {
         try {
-            const response = await axios.post("https://propftxmovies-7d1253gor-saiteja-goli.vercel.app/movies/addmovie", newMovie);
+            const response = await axios.post("https://violet-monkey-coat.cyclic.app/movies/addmovie", newMovie);
             setMovies([...movies, response.data.movie]);
             toast({
                 title: 'Movie Added.',
@@ -56,7 +56,7 @@ const MovieList = () => {
     //Editing Movie
     const handleEditMovie = async (editedMovie) => {
         try {
-            const response = await axios.put(`https://propftxmovies-7d1253gor-saiteja-goli.vercel.app/movies/edit/${editedMovie._id}`, editedMovie);
+            const response = await axios.put(`https://violet-monkey-coat.cyclic.app/movies/edit/${editedMovie._id}`, editedMovie);
             const updatedMovies = movies.map(movie =>
                 movie._id === response.data.movie._id ? response.data.movie : movie
             );
@@ -75,7 +75,7 @@ const MovieList = () => {
     //Deleting Movie
     const handleDeleteMovie = async (movieId) => {
         try {
-            await axios.delete(`https://propftxmovies-7d1253gor-saiteja-goli.vercel.app/movies/delete/${movieId}`);
+            await axios.delete(`https://violet-monkey-coat.cyclic.app/movies/delete/${movieId}`);
             const updatedMovies = movies.filter(movie => movie._id !== movieId);
             setMovies(updatedMovies);
             toast({
