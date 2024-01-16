@@ -1,7 +1,7 @@
 # PropFTX-Assignment
 
 # DeployedLink :
-- [Link](https://client-i3a44j2j3-saiteja-goli.vercel.app/)
+- [Link](https://client-eaujsjgc5-saiteja-goli.vercel.app/)
 
 # Movie App
 
