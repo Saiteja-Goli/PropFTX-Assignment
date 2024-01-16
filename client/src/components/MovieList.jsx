@@ -26,7 +26,7 @@ const MovieList = () => {
     useEffect(() => {
         const fetchMovies = async () => {
             try {
-                const response = await axios.get("https://propftxmovies-mv6jh5jhe-saiteja-goli.vercel.app//movies/");
+                const response = await axios.get("https://propftxmovies-mv6jh5jhe-saiteja-goli.vercel.app/movies/");
                 console.log(response.data.movies);
                 setMovies(response.data.movies);
             } catch (error) {
@@ -56,7 +56,7 @@ const MovieList = () => {
     //Editing Movie
     const handleEditMovie = async (editedMovie) => {
         try {
-            const response = await axios.put(`https://propftxmovies-mv6jh5jhe-saiteja-goli.vercel.app//movies/edit/${editedMovie._id}`, editedMovie);
+            const response = await axios.put(`https://propftxmovies-mv6jh5jhe-saiteja-goli.vercel.app/movies/edit/${editedMovie._id}`, editedMovie);
             const updatedMovies = movies.map(movie =>
                 movie._id === response.data.movie._id ? response.data.movie : movie
             );
@@ -75,7 +75,7 @@ const MovieList = () => {
     //Deleting Movie
     const handleDeleteMovie = async (movieId) => {
         try {
-            await axios.delete(`https://propftxmovies-mv6jh5jhe-saiteja-goli.vercel.app//movies/delete/${movieId}`);
+            await axios.delete(`https://propftxmovies-mv6jh5jhe-saiteja-goli.vercel.app/movies/delete/${movieId}`);
             const updatedMovies = movies.filter(movie => movie._id !== movieId);
             setMovies(updatedMovies);
             toast({
