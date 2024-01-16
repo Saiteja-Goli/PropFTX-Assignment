@@ -92,8 +92,15 @@ const MovieList = () => {
 
     return (
         <div>
-            <Heading>All Movies</Heading>
-            <Button ml={960} onClick={() => setIsAddFormOpen(true)}>
+            <Box backgroundColor="purple.200"
+                mb={5}
+                p={5}
+                position="fixed"
+                width="100%"
+                top="0"
+                zIndex="1000"
+            ><Heading>Movies</Heading></Box>
+            <Button variant="solid" colorScheme="green" mt={100} ml={960} onClick={() => setIsAddFormOpen(true)}>
                 Add Movie
             </Button>
 
@@ -144,8 +151,8 @@ const MovieList = () => {
                                             Edit
                                         </Button>
                                         <Button
-                                            variant="ghost"
-                                            colorScheme="blue"
+                                            variant="solid"
+                                            colorScheme="red"
                                             onClick={() => handleDeleteMovie(movie._id)}
                                         >
                                             Delete
