@@ -34,7 +34,7 @@ const MovieList = () => {
     useEffect(() => {
         const fetchMovies = async () => {
             try {
-                const response = await axios.get("https://violet-monkey-coat.cyclic.app/movies");
+                const response = await axios.get("https://motionless-yak-underwear.cyclic.app/movies");
                 console.log(response.data.movies);
                 setMovies(response.data.movies);
             } catch (error) {
@@ -47,7 +47,7 @@ const MovieList = () => {
     //Adding New Movie
     const handleAddMovie = async (newMovie) => {
         try {
-            const response = await axios.post("https://violet-monkey-coat.cyclic.app/movies/addmovie", newMovie);
+            const response = await axios.post("https://motionless-yak-underwear.cyclic.app/movies/addmovie", newMovie);
             setMovies([...movies, response.data.movie]);
             toast({
                 title: 'Movie Added.',
@@ -65,7 +65,7 @@ const MovieList = () => {
         console.log('Edited Movie:', editedMovie);
 
         try {
-            const response = await axios.put(`https://violet-monkey-coat.cyclic.app/movies/edit/${editedMovie._id}`, editedMovie);
+            const response = await axios.put(`https://motionless-yak-underwear.cyclic.app/movies/edit/${editedMovie._id}`, editedMovie);
             console.log('Edit Movie Response:', response.data);
 
             const updatedMovies = movies.map(movie =>
@@ -88,7 +88,7 @@ const MovieList = () => {
     //Deleting Movie
     const handleDeleteMovie = async (movieId) => {
         try {
-            await axios.delete(`https://violet-monkey-coat.cyclic.app/movies/delete/${movieId}`);
+            await axios.delete(`https://motionless-yak-underwear.cyclic.app/movies/delete/${movieId}`);
             const updatedMovies = movies.filter(movie => movie._id !== movieId);
             setMovies(updatedMovies);
             toast({
