@@ -1,6 +1,6 @@
 const express = require("express");
 const cors = require("cors");
-
+require("dotenv").config();
 const connection = require("./Configs/db");
 const movie_router = require("./Router/movieRouter");
 
@@ -14,11 +14,11 @@ app.get("/", (req, res) => {
 
 app.use("/movies", movie_router);
 
-app.listen(9000, async () => {
+app.listen(process.env.PORT, async () => {
   try {
     await connection;
     console.log("connected to db");
-    console.log("Connected to the Backend");
+    console.log("Server Is Running");
   } catch (error) {
     console.log(error);
   }

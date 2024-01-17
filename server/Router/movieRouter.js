@@ -7,7 +7,9 @@ const movie_router = express.Router();
 movie_router.get("/allmovies", async (req, res) => {
   try {
     const movies = await movieModel.find();
-    res.status(200).json({ message: "All Movies Fetched Successfully", movies: movies });
+    res
+      .status(200)
+      .json({ message: "All Movies Fetched Successfully", movies: movies });
   } catch (error) {
     console.log(error);
     res.status(500).json({ message: "Internal Server Error" });
@@ -20,7 +22,9 @@ movie_router.post("/addmovie", async (req, res) => {
     const { title, year, image } = req.body;
     const new_movie = new movieModel({ title, year, image });
     await new_movie.save();
-    res.status(200).json({ message: "Movie Added Successfully", movie: new_movie });
+    res
+      .status(200)
+      .json({ message: "Movie Added Successfully", movie: new_movie });
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Internal Server Error" });
@@ -48,7 +52,9 @@ movie_router.put("/edit/:id", async (req, res) => {
     // Save the updated movie
     const updatedMovie = await existingMovie.save();
 
-    res.status(200).json({ message: "Movie updated successfully", movie: updatedMovie });
+    res
+      .status(200)
+      .json({ message: "Movie updated successfully", movie: updatedMovie });
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Internal Server Error" });
