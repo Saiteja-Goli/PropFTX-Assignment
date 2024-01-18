@@ -38,20 +38,17 @@ const MovieForm = ({ isOpen, onClose, onSubmit, formData, setFormData }) => {
             });
         }
     }, [formData]);
-
     const handleChange = (e) => {
         setLocalFormData({
             ...localFormData,
             [e.target.name]: e.target.value,
         });
-
         // Clear error when user starts typing
         setFormErrors({
             ...formErrors,
             [e.target.name]: false,
         });
     };
-
     const handleSubmit = () => {
         // Check for empty fields
         const errors = {};
@@ -61,13 +58,11 @@ const MovieForm = ({ isOpen, onClose, onSubmit, formData, setFormData }) => {
                 errors[key] = true;
             }
         });
-
         if (Object.keys(errors).length > 0) {
             setFormErrors(errors);
             console.log('Form has errors:', errors);
         } else {
             console.log('Form Data:', localFormData);
-
             // Submit the form and reset localFormData
             onSubmit(localFormData);
             onClose();
@@ -76,7 +71,6 @@ const MovieForm = ({ isOpen, onClose, onSubmit, formData, setFormData }) => {
                 year: "",
                 image: "",
             });
-
             // Clear any previous errors
             setFormErrors({
                 title: false,

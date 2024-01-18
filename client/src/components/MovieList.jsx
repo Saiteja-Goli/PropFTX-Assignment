@@ -27,18 +27,19 @@ const MovieList = () => {
     const [editFormData, setEditFormData] = useState(null);
     const [gData, setgData] = useState("")
     const [data, setData] = useState(true)
+    const [loading, setLoading] = useState(true);
     const toast = useToast()
-
-
     //Fetching Movies
     useEffect(() => {
         const fetchMovies = async () => {
             try {
-                const response = await axios.get("https://motionless-yak-underwear.cyclic.app/movies");
+                const response = await axios.get("https://motionless-yak-underwear.cyclic.ap/movies");
                 console.log(response.data.movies);
                 setMovies(response.data.movies);
+                setLoading(false);
             } catch (error) {
                 console.log("Error fetching movies:", error);
+                // setLoading(false);
             }
         };
 
@@ -84,7 +85,6 @@ const MovieList = () => {
             console.error("Error editing movie:", error);
         }
     };
-
     //Deleting Movie
     const handleDeleteMovie = async (movieId) => {
         try {
@@ -174,56 +174,61 @@ const MovieList = () => {
             />
 
             <Center>
-                <Box
-                    style={{
-                        display: "grid",
-                        gridTemplateColumns: "1fr 1fr 1fr",
-                        gap: "10px",
-                    }}
-                >
-                    {movies.map((movie) => (
-                        <Box key={movie._id} mt={10} gap={10} maxW="sm">
-                            <Card>
-                                <Image
-                                    src={movie.image}
-                                    alt={movie.title}
-                                    borderTopRadius="lg"
-                                    maxH="200px"
-                                    objectFit="cover"
-                                />
-                                <CardBody>
-                                    <Stack spacing="3">
-                                        <Heading size="md">{movie.title}</Heading>
-                                        <Text color="blue.600" fontSize="lg">
-                                            YEAR : {movie.year}
-                                        </Text>
-                                    </Stack>
-                                </CardBody>
-                                <Center>
-                                    <ButtonGroup mb={10} spacing="2">
-                                        <Button
-                                            variant="solid"
-                                            colorScheme="orange"
-                                            onClick={() => {
-                                                setIsEditFormOpen(true);
-                                                setEditFormData(movie);
-                                            }}
-                                        >
-                                            Edit
-                                        </Button>
-                                        <Button
-                                            variant="solid"
-                                            colorScheme="red"
-                                            onClick={() => handleDeleteMovie(movie._id)}
-                                        >
-                                            Delete
-                                        </Button>
-                                    </ButtonGroup>
-                                </Center>
-                            </Card>
+                {
+                    loading ? <div class="spinner"></div>
+                    :
+                        <Box
+                            style={{
+                                display: "grid",
+                                gridTemplateColumns: "1fr 1fr 1fr",
+                                gap: "10px",
+                            }}
+                        >
+                            {movies.map((movie) => (
+                                <Box key={movie._id} mt={10} gap={10} maxW="sm">
+                                    <Card>
+                                        <Image
+                                            src={movie.image}
+                                            alt={movie.title}
+                                            borderTopRadius="lg"
+                                            maxH="200px"
+                                            objectFit="cover"
+                                        />
+                                        <CardBody>
+                                            <Stack spacing="3">
+                                                <Heading size="md">{movie.title}</Heading>
+                                                <Text color="blue.600" fontSize="lg">
+                                                    YEAR : {movie.year}
+                                                </Text>
+                                            </Stack>
+                                        </CardBody>
+                                        <Center>
+                                            <ButtonGroup mb={10} spacing="2">
+                                                <Button
+                                                    variant="solid"
+                                                    colorScheme="orange"
+                                                    onClick={() => {
+                                                        setIsEditFormOpen(true);
+                                                        setEditFormData(movie);
+                                                    }}
+                                                >
+                                                    Edit
+                                                </Button>
+                                                <Button
+                                                    variant="solid"
+                                                    colorScheme="red"
+                                                    onClick={() => handleDeleteMovie(movie._id)}
+                                                >
+                                                    Delete
+                                                </Button>
+                                            </ButtonGroup>
+                                        </Center>
+                                    </Card>
+                                </Box>
+                            ))}
                         </Box>
-                    ))}
-                </Box>
+                }
+
             </Center>
 
             <MovieForm

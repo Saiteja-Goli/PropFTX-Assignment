@@ -6,8 +6,6 @@ function App() {
     <div className="App">
       <div>
         <MovieList />
-        {/* <AddMovie /> */}
-        {/* <DeleteMovie movieId="some_movie_id" /> */}
       </div>
     </div>
   );
