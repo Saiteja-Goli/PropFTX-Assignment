@@ -33,7 +33,7 @@ const MovieList = () => {
     useEffect(() => {
         const fetchMovies = async () => {
             try {
-                const response = await axios.get("https://motionless-yak-underwear.cyclic.ap/movies");
+                const response = await axios.get("https://motionless-yak-underwear.cyclic.app/movies");
                 console.log(response.data.movies);
                 setMovies(response.data.movies);
                 setLoading(false);
